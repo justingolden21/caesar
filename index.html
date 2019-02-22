@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Caesar Cipher</title>
+
+<meta charset="utf-8">
+<meta name="title=" content="Caesar Cipher">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A Caesar Cipher encoder and decoder">
+<meta name="keywords" content="caesar cipher, caesarm cipher, encode, encoder, decoder, cryptography">
+<!-- <link rel="icon" href="img/icon.png" type="image/png"> -->
+<!-- <meta id="theme1" name="theme-color" content="#ccc">
+<meta id="theme2" name="msapplication-navbutton-color" content="#ccc">
+<meta id="theme3" name="apple-mobile-web-app-status-bar-style" content="#ccc"> -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" async>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+Caesar Cipher
+<br>
+Input:
+<input id="input" type="text" class="form-control form-control-lg">
+Shift Number:
+<input id="shift" type="number" class="form-control form-control-lg" min="1" max="25" value="1">
+Output:
+<input id="output" type="text" class="form-control form-control-lg">
+<button id="cipherAll" class="btn btn-lg">Cipher All</button>
+<p id="outputAll"></p>
+
+<script type="text/javascript">
+let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+$(function() {
+	$('#input').change(doCipher);
+	$('#shift').change(doCipher);
+	$('#cipherAll').click(doCipherAll);
+
+});
+
+function doCipher() {
+	let inputVal = $('#input').val();
+	let outputVal = '';
+	let shiftNum = parseInt($('#shift').val() );
+	for(let i=0; i<inputVal.length; i++)
+		outputVal += shift(inputVal[i], shiftNum);
+	$('#output').val(outputVal);
+}
+
+function doCipherAll() {
+	let answers = [];
+	for(let i=0; i<26; i++) {
+		let answer = '';
+		let inputVal = $('#input').val();
+		for(let j=0; j<inputVal.length; j++) {
+			answer += shift(inputVal[j], i);
+		}
+		answers.push(answer);
+	}
+	// todo: add chipher number next to each line (1-26)
+	$('#outputAll').html(answers.join('<br>') );
+
+}
+
+function shift(char, num) {
+	let idx = alphabet.indexOf(char);
+	if(idx == -1)
+		return char;
+	idx += num;
+	idx %= 26;
+	if(idx < 0)
+		idx = -idx;
+	return alphabet[idx];
+}
+
+</script>
+
+
+</body>
+</html>
