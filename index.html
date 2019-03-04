@@ -30,32 +30,26 @@
 <body>
 
 <div class="container-fluid">
-
+	<br>
 	<h3>Caesar Cipher</h3>
-	
 	<br>
 	
 	Input:
 	<input id="input" type="text" class="form-control form-control-lg">
-	
 	<br>
 	
 	Shift Number:
 	<input id="shift" type="number" class="form-control form-control-lg" min="1" max="25" value="1">
-	
 	<br>
 
 	Output:
 	<input id="output" type="text" class="form-control form-control-lg">
-
 	<br>
 
 	<button id="cipherAll" class="btn btn-lg btn-dark">Cipher All</button>
-
 	<br><br>
 
 	<p id="outputAll"></p>
-
 </div>
 
 <script type="text/javascript">
@@ -65,11 +59,7 @@ $(function() {
 	$('#shift').change(doCipher);
 	$('#cipherAll').click(doCipherAll);
 
-
-	$('#input').val('cat');
-	$('#input').select();
-	$('#input').change();
-
+	$('#input').val('cat').change().select();
 });
 
 function doCipher() {
@@ -86,13 +76,12 @@ function doCipherAll() {
 	for(let i=0; i<26; i++) {
 		let answer = '';
 		let inputVal = $('#input').val();
-		for(let j=0; j<inputVal.length; j++) {
+		for(let j=0; j<inputVal.length; j++)
 			answer += shift(inputVal[j], i);
-		}
 		answers.push(i + '. ' + answer);
 	}
-	$('#outputAll').html(answers.join('<br>') );
-
+	$('#outputAll').html('<div class="row"><div class="col-md-3 col-sm-4 col-6">' + answers.join('</div><div class="col-md-3 col-sm-4 col-6">') + 
+		'</div></div>');
 }
 
 function shift(char, num) {
