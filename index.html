@@ -20,19 +20,43 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" async>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
+<style type="text/css">
+	* {
+		text-align: center;
+	}
+</style>
+
 </head>
 <body>
 
-Caesar Cipher
-<br>
-Input:
-<input id="input" type="text" class="form-control form-control-lg">
-Shift Number:
-<input id="shift" type="number" class="form-control form-control-lg" min="1" max="25" value="1">
-Output:
-<input id="output" type="text" class="form-control form-control-lg">
-<button id="cipherAll" class="btn btn-lg">Cipher All</button>
-<p id="outputAll"></p>
+<div class="container-fluid">
+
+	<h3>Caesar Cipher</h3>
+	
+	<br>
+	
+	Input:
+	<input id="input" type="text" class="form-control form-control-lg">
+	
+	<br>
+	
+	Shift Number:
+	<input id="shift" type="number" class="form-control form-control-lg" min="1" max="25" value="1">
+	
+	<br>
+
+	Output:
+	<input id="output" type="text" class="form-control form-control-lg">
+
+	<br>
+
+	<button id="cipherAll" class="btn btn-lg btn-dark">Cipher All</button>
+
+	<br><br>
+
+	<p id="outputAll"></p>
+
+</div>
 
 <script type="text/javascript">
 let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -40,6 +64,11 @@ $(function() {
 	$('#input').change(doCipher);
 	$('#shift').change(doCipher);
 	$('#cipherAll').click(doCipherAll);
+
+
+	$('#input').val('cat');
+	$('#input').select();
+	$('#input').change();
 
 });
 
@@ -60,9 +89,8 @@ function doCipherAll() {
 		for(let j=0; j<inputVal.length; j++) {
 			answer += shift(inputVal[j], i);
 		}
-		answers.push(answer);
+		answers.push(i + '. ' + answer);
 	}
-	// todo: add chipher number next to each line (1-26)
 	$('#outputAll').html(answers.join('<br>') );
 
 }
@@ -80,6 +108,10 @@ function shift(char, num) {
 
 </script>
 
+<!-- TODO:
+add url params option
+add copy buttons
+ -->
 
 </body>
 </html>
